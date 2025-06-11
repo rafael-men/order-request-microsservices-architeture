@@ -2,9 +2,7 @@ package org.rafael.repository;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.rafael.models.CustomerModel;
-
-import java.util.List;
+import org.rafael.models.ProductModel;
 
 @ApplicationScoped
-public class CustomerRepository implements PanacheRepository<CustomerModel> {}
+public class ProductRepository implements PanacheRepository<ProductModel> {}

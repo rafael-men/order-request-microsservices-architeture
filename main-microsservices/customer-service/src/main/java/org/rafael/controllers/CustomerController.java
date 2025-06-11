@@ -14,7 +14,7 @@ import java.util.List;
 public class CustomerController {
 
     @Inject
-    private final CustomerService service;
+    CustomerService service;
 
     public CustomerController(CustomerService service) {
         this.service = service;
