@@ -32,8 +32,6 @@ isso irá criar os contêineres das aplicações e dos bancos.
 4. Executando os Serviços Individualmente (Modo Desenvolvimento)
 Você pode iniciar cada serviço em modo de desenvolvimento, o que permite o hot-reload de código. Abra um terminal separado para cada serviço:
 
-Bash
-
 # No diretório customer-service
 
 ```bash
