@@ -1,6 +1,5 @@
 package org.rafael.services;
 
-
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import org.hibernate.service.spi.ServiceException;
@@ -23,7 +22,7 @@ public class ProductServices {
 
     public List<ProductDto> getAllProducts() {
         try {
-            List<ProductModel> products = (List<ProductModel>) repository.findAll();
+            List<ProductModel> products = repository.findAll().list();
             List<ProductDto> productDtos = products.stream()
                     .map(this::convertToDto)
                     .collect(Collectors.toList());
@@ -34,8 +33,6 @@ public class ProductServices {
             throw new ServiceException("Erro ao buscar produtos", e);
         }
     }
-
-
 
     @Transactional
     public ProductDto createProduct(ProductDto productDto) {
@@ -114,13 +111,12 @@ public class ProductServices {
         return dto;
     }
 
-        private ProductModel convertToModel(ProductDto dto) {
-            ProductModel product = new ProductModel();
-            product.setName(dto.getName());
-            product.setDescription(dto.getDescription());
-            product.setPrice(dto.getPrice());
-            product.setCategory(dto.getCategory());
-            return product;
-        }
-
+    private ProductModel convertToModel(ProductDto dto) {
+        ProductModel product = new ProductModel();
+        product.setName(dto.getName());
+        product.setDescription(dto.getDescription());
+        product.setPrice(dto.getPrice());
+        product.setCategory(dto.getCategory());
+        return product;
+    }
 }
