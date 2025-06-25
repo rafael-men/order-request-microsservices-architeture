@@ -36,7 +36,21 @@ isso irá criar os contêineres das aplicações e dos bancos.
 - na pasta raíz do projeto, dê o comando
 
 ```bash
-
+docker pull quay.io/keycloak/keycloak:17.0.0
+docker run -d --name keycloak \
+  --network keycloak-net \
+  -p 8100:8080 \
+  -p 8443:8443 \
+  -e KC_DB=postgres \
+  -e KC_DB_URL_HOST=keycloak-db \
+  -e KC_DB_URL_DATABASE=keycloak \
+  -e KC_DB_USERNAME=keycloak \
+  -e KC_DB_PASSWORD=mysecretpassword \
+  -e KEYCLOAK_ADMIN=admin \
+  -e KEYCLOAK_ADMIN_PASSWORD=admin \
+  -e KC_HOSTNAME=localhost \
+  quay.io/keycloak/keycloak:24.0.5 \
+  start-dev
 ```
 
 isso irá iniciar o dashboard do keycloak em **http://localhost:8100**.
