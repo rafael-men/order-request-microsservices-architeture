@@ -9,34 +9,33 @@ Este é um projeto de exemplo que demonstra a implementação de microsserviços
 - KeyCloak para autenticação no order-service.
 - PostgreSQL: Banco de dados relacional (pode ser configurado para outros SGBDs).
 - RESTful Web Services: Comunicação entre os serviços.
-- Docker Compose: Para orquestração de múltiplos contêineres (opcional).
+- Docker: Para inicialização do banco de dados e do keycloak.
 
 ## ⚙️ Como Executar
 Você tem algumas opções para executar os microsserviços:
 
 1. Pré-requisitos
    
-3. Certifique-se de ter instalado:
+2. Certifique-se de ter instalado:
 
 - JDK 17 ou superior
 - Maven 3.8.x ou superior
 - Docker
 
-3. Executando os Serviços no Docker:
-- na pasta raíz do projeto, dê o comando
-
-```bash
-docker compose up
-```
-
-isso irá criar os contêineres das aplicações e dos bancos.
-
-4. Executando o serviço do Keycloak:
+3. Executando o serviço do Keycloak e do banco de dados:
    
 - na pasta raíz do projeto, dê o comando
 
 ```bash
+# POSTGRESQL
+------------
+
+docker run -p 5432:5432 -e POSTGRES_PASSWORD=SUA-senha postgres.
+
+#KEYCLOAK
+------------
 docker pull quay.io/keycloak/keycloak:17.0.0
+
 docker run -d --name keycloak \
   --network keycloak-net \
   -p 8100:8080 \
@@ -53,9 +52,9 @@ docker run -d --name keycloak \
   start-dev
 ```
 
-isso irá iniciar o dashboard do keycloak em **http://localhost:8100**.
+isso irá iniciar o dashboard do keycloak em **http://localhost:8100** e o postgres em **http://localhost:5432**.
 
-5. Executando os Serviços Individualmente (Modo Desenvolvimento)
+4. Executando os Serviços Individualmente (Modo Desenvolvimento)
 Você pode iniciar cada serviço em modo de desenvolvimento, o que permite o hot-reload de código. Abra um terminal separado para cada serviço:
 
 # No diretório customer-service
@@ -78,7 +77,7 @@ mvn quarkus:dev
 cd order-service
 mvn quarkus:dev
 ```
-- Cada serviço será iniciado em uma porta diferente (padrão do Quarkus, ex: 8080, 8081, 8082, etc. ou configurado no application.properties). Verifique os logs para as portas exatas.
+- Cada serviço será iniciado em uma porta diferente do Swagger (padrão do Quarkus, ex: 8080, 8081, 8082, etc. ou configurado no application.properties). Verifique os logs para as portas exatas.
 
 
 🤝 Contribuição
