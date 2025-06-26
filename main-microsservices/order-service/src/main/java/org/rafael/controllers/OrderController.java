@@ -1,5 +1,6 @@
 package org.rafael.controllers;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -29,6 +30,7 @@ public class OrderController {
     }
 
     @GET
+    @RolesAllowed({"user","admin"})
     public List<OrderModel> getAllOrders() {
         return service.getAllOrders();
     }
